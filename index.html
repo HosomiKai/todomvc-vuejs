@@ -48,7 +48,7 @@
 					</li>
 				</ul>
 				<!-- Hidden if no completed items are left ↓ -->
-				<button class="clear-completed">Clear completed</button>
+				<button class="clear-completed" @click="removeCompleted">Clear completed</button>
 			</footer>
 		</section>
 		<footer class="info">
@@ -84,7 +84,18 @@
                             this.todolist.push({ 'text': todo, isFinished:false });
                             this.currTodo.text = '';
 						}
-                    }
+                    },
+					removeCompleted: function(){
+                        var tmp = [];
+                        this.todolist.forEach(function(todo,key){
+                            if(!todo.isFinished){
+                                tmp.push(todo)
+							}
+                        })
+						if(tmp.length > 0){
+                            this.todolist = tmp;
+						}
+					}
                 },
 				watch:{
                     selectAll: function (val) {
