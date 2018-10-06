@@ -12,7 +12,7 @@
 		<section class="todoapp">
 			<header class="header">
 				<h1>todos</h1>
-				<input class="new-todo" placeholder="What needs to be done?" autofocus>
+				<input class="new-todo" v-model="currTodo.text" @keyup.enter="addTodo" v-bind:placeholder="inputHint" autofocus >
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
 			<section class="main">
@@ -69,11 +69,20 @@
                     todolist: [
 						{ text:'Taste JavaScript', 'isFinished': true },
 						{ text:'Buy a unicorn', 'isFinished': false }
-					]
+					],
+                    currTodo:{ 'text': '' , isFinished:false },
+					inputHint: 'What needs to be done?'
                 },
                 methods: {
                     removeTodo: function (key) {
                         this.todolist.splice(key, 1)
+                    },
+                    addTodo: function(){
+                        if(this.currTodo.text){
+                            var todo = this.currTodo.text;
+                            this.todolist.push({ 'text': todo, isFinished:false });
+                            this.currTodo.text = '';
+						}
                     }
                 }
             })
