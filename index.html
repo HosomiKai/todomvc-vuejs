@@ -87,14 +87,12 @@
                     },
 					removeCompleted: function(){
                         var tmp = [];
-                        this.todolist.forEach(function(todo,key){
+                        this.todolist.forEach(function(todo){
                             if(!todo.isFinished){
                                 tmp.push(todo)
 							}
-                        })
-						if(tmp.length > 0){
-                            this.todolist = tmp;
-						}
+                        });
+						this.todolist = tmp;
 					}
                 },
 				watch:{
