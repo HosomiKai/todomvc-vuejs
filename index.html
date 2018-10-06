@@ -16,7 +16,7 @@
 			</header>
 			<!-- This section should be hidden by default and shown when there are todos -->
 			<section class="main">
-				<input class="toggle-all" type="checkbox">
+				<input class="toggle-all" type="checkbox" v-model="selectAll">
 				<label for="toggle-all">Mark all as complete</label>
 				<ul class="todo-list">
 					<!-- These are here just to show the structure of the list items -->
@@ -71,7 +71,8 @@
 						{ text:'Buy a unicorn', 'isFinished': false }
 					],
                     currTodo:{ 'text': '' , isFinished:false },
-					inputHint: 'What needs to be done?'
+					inputHint: 'What needs to be done?',
+					selectAll: false
                 },
                 methods: {
                     removeTodo: function (key) {
@@ -84,7 +85,20 @@
                             this.currTodo.text = '';
 						}
                     }
-                }
+                },
+				watch:{
+                    selectAll: function (val) {
+						if(val){
+						    this.todolist.forEach(function(todo){
+								todo.isFinished = true;
+							})
+						}else{
+                            this.todolist.forEach(function(todo){
+                                todo.isFinished = false;
+                            })
+						}
+                    }
+				}
             })
 		</script>
 	</body>
