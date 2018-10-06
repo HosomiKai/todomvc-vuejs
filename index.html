@@ -34,7 +34,7 @@
 			<!-- This footer should hidden by default and shown when there are todos -->
 			<footer class="footer">
 				<!-- This should be `0 items left` by default -->
-				<span class="todo-count"><strong>0</strong> item left</span>
+				<span class="todo-count"><strong>{{ countLeft }}</strong> item left</span>
 				<!-- Remove this if you don't implement routing -->
 				<ul class="filters">
 					<li>
@@ -95,6 +95,17 @@
 						this.todolist = tmp;
 					}
                 },
+				computed:{
+				    countLeft: function(){
+				        var counter = 0;
+                        this.todolist.forEach(function(todo){
+                            if(!todo.isFinished){
+                                counter++;
+                            }
+                        });
+                        return counter;
+					}
+				},
 				watch:{
                     selectAll: function (val) {
 						if(val){
